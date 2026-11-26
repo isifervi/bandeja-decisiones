@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline' https://telegram.org; style-src 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Bandeja de decisiones · ConsultorIA Isifervi</title>
+<script>
+// Se guarda la parte tras «#» antes de que cargue el script de Telegram. Ahí viajan las tarjetas:
+// el navegador nunca la manda al servidor, así que la página publicada no contiene ninguna.
+window.__hashOriginal = String(location.hash || '');
+</script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+@font-face{font-family:'Outfit';font-style:normal;font-weight:100 900;font-display:swap;src:url(assets/outfit-latin.woff2)format('woff2')}
+@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(assets/inter-latin.woff2)format('woff2')}
+:root{
+  --navy:#1F4E79; --turq:#20C997; --cyan:#30A7E2; --gold:#FFD700;
+  --ink-dark:#12293E; --ink-mid:#44607A; --teal-deep:#0E7A63;
+  --paper:#F3F7FB; --paper-card:#FFFFFF; --line-light:#DCE6EF;
+  --gradOscuro:linear-gradient(158deg,#27598A 0%,#1F4E79 58%,#173C5E 100%);
+  --gradBtn:linear-gradient(135deg,#20988B 0%,#20C997 100%);
+  --btn-ink:#06202E;
+  --r-sm:9px; --r-md:14px; --r-pill:999px;
+  --sh-card:0 9px 28px -18px rgba(31,78,121,.25);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink-dark);font-family:'Inter',system-ui,-apple-system,sans-serif;
+  -webkit-font-smoothing:antialiased;line-height:1.45;font-size:15px;padding-bottom:96px}
+h1,h2,h3{font-family:'Outfit',sans-serif;margin:0;line-height:1.2}
+.cab{background:var(--gradOscuro);color:#fff;padding:18px 16px 16px;border-bottom:3px solid var(--turq)}
+.cab .fila{display:flex;align-items:center;gap:12px}
+.cab img{width:36px;height:36px;border-radius:8px;background:#fff;padding:3px}
+.cab h1{font-size:20px;font-weight:700}
+.cab p{margin:6px 0 0;font-size:13px;color:#D6E6F5}
+.progreso{margin-top:12px;height:6px;border-radius:var(--r-pill);background:rgba(255,255,255,.18);overflow:hidden}
+.progreso i{display:block;height:100%;width:0;background:var(--turq);transition:width .25s}
+.aviso{margin:12px 16px 0;padding:10px 12px;border-radius:var(--r-sm);font-size:13px;background:#FFF7D1;border:1px solid #E9D77A;color:#4A3D00}
+main{padding:4px 12px}
+.tarjeta{background:var(--paper-card);border:1px solid var(--line-light);border-radius:var(--r-md);box-shadow:var(--sh-card);
+  margin:14px 0;padding:16px}
+.tarjeta.hecha{border-color:var(--turq)}
+.tarjeta .etq{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-deep);margin-bottom:6px}
+.tarjeta h2{font-size:17px;font-weight:700;color:var(--navy)}
+.dato{margin:10px 0 0}
+.dato b{display:block;font-size:12px;color:var(--ink-mid);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.dato span{display:block;margin-top:2px}
+fieldset{border:0;padding:0;margin:14px 0 0}
+legend{font-size:12px;color:var(--ink-mid);font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.op{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line-light);border-radius:var(--r-sm);padding:10px 12px;margin:8px 0;cursor:pointer}
+.op input{margin-top:3px;accent-color:var(--teal-deep);width:18px;height:18px;flex:none}
+.op:has(input:checked){border-color:var(--turq);background:#EAFBF5}
+.op:focus-within{outline:3px solid var(--cyan);outline-offset:2px}
+.op .t{font-weight:600}
+.op .c{display:block;font-size:13px;color:var(--ink-mid);margin-top:2px}
+.op .rec{display:inline-block;margin-left:6px;font-size:11px;font-weight:700;color:var(--btn-ink);background:var(--gold);border-radius:var(--r-pill);padding:1px 8px;vertical-align:1px}
+.sesgo{margin-top:8px;font-size:13px;color:var(--ink-mid)}
+.fuente{margin-top:4px;font-size:12px;color:var(--ink-mid)}
+textarea{width:100%;margin-top:10px;min-height:54px;border:1px solid var(--line-light);border-radius:var(--r-sm);padding:8px 10px;font:inherit;font-size:14px;color:var(--ink-dark);resize:vertical}
+textarea:focus{outline:3px solid var(--cyan);outline-offset:1px}
+.pie{position:fixed;left:0;right:0;bottom:0;background:var(--paper-card);border-top:1px solid var(--line-light);padding:12px 16px calc(12px + env(safe-area-inset-bottom))}
+button.enviar{width:100%;border:0;border-radius:13px;padding:14px;font:600 16px 'Outfit',sans-serif;color:var(--btn-ink);background:var(--gradBtn);cursor:pointer;
+  box-shadow:0 18px 44px -18px rgba(32,201,151,.7)}
+button.enviar:disabled{opacity:.5;cursor:default;box-shadow:none}
+button.enviar:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
+.carga{margin:14px 0;padding:14px;border-radius:var(--r-md);background:#0F2A40;color:#D6E6F5;font:12px/1.5 ui-monospace,Consolas,monospace;white-space:pre-wrap;word-break:break-word}
+.carga h3{font:600 14px 'Outfit',sans-serif;color:#fff;margin-bottom:8px}
+@media (min-width:640px){main{max-width:600px;margin:0 auto}}
+</style>
+
+</head>
+<body>
+<header class="cab">
+  <div class="fila">
+    <img src="assets/logo-isifervi-03-64.png" alt="ConsultorIA Isifervi">
+    <div>
+      <h1>Bandeja de decisiones</h1>
+      <p id="resumen">Cargando…</p>
+    </div>
+  </div>
+  <div class="progreso" aria-hidden="true"><i id="barra"></i></div>
+</header>
+<div id="aviso" class="aviso" hidden></div>
+<main id="lista" aria-live="polite"></main>
+<div class="pie"><button class="enviar" id="enviar" type="button" disabled>Elige al menos una respuesta</button></div>
+
+<!-- Decisiones INVENTADAS: solo se ven si la página se abre sin tarjetas (fuera del bot).
+     Las reales nunca están aquí: viajan detrás del «#» de la dirección, que el navegador no
+     manda al servidor. -->
+<script type="application/json" id="ejemplo">
+{"v":2,"f":"2026-01-01","d":[
+ {"id":"d1","area":"Ejemplo · Agenda","titulo":"Horario de atención en diciembre","que":"Decidir si la oficina abre por la tarde la semana del 22 al 26 de diciembre.","hoy":"El horario publicado es de 9:00 a 19:00 todos los días laborables.","siNo":"Se mantiene el horario publicado.","sesgo":"Cerrar por la tarde me ahorra coordinar turnos, así que tiendo a recomendarlo.","fuente":"Ejemplo inventado","aplazada":0,
+  "opciones":[{"id":"a","t":"Abrir solo por la mañana","c":"Coste: avisar a los clientes una vez.","rec":true},{"id":"b","t":"Mantener el horario completo","c":"Coste: cubrir las tardes con turnos."}]},
+ {"id":"d2","area":"Ejemplo · Compras","titulo":"Proveedor de material de oficina","que":"Elegir entre renovar con el proveedor actual o cambiar al de la nueva oferta.","hoy":"El contrato actual vence a final de mes; la oferta nueva es algo más barata.","siNo":"El contrato actual se renueva solo por un año.","sesgo":"Ninguno que me empuje.","fuente":"Ejemplo inventado","aplazada":2,
+  "opciones":[{"id":"a","t":"Renovar con el actual","c":"Coste: ninguno de cambio."},{"id":"b","t":"Cambiar al nuevo","c":"Coste: una tarde de papeleo.","rec":true}]}
+]}
+</script>
+
+<script>
+(function(){
+  'use strict';
+  var TOPE_BYTES = 4096;               // límite de sendData según la documentación de Telegram
+  var HASH = window.__hashOriginal || '';
+  var tg = window.Telegram && window.Telegram.WebApp;
+  var enTelegram = !!(tg && tg.platform && tg.platform !== 'unknown');
+  var lista = document.getElementById('lista');
+  var aviso = document.getElementById('aviso');
+  var botonPagina = document.getElementById('enviar');
+  var datos = null, respuestas = {}, esEjemplo = false;
+
+  function el(tag, cls, texto){ var n=document.createElement(tag); if(cls) n.className=cls; if(texto!=null) n.textContent=texto; return n; }
+  function mostrarAviso(t){ aviso.textContent = t; aviso.hidden = false; }
+  function bytes(s){ return new TextEncoder().encode(s).length; }
+  function parametro(nombre){
+    var h = HASH.replace(/^#/, '').split('&');
+    for (var i = 0; i < h.length; i++) { var p = h[i].split('='); if (p[0] === nombre) return p[1] || ''; }
+    return null;
+  }
+
+  function descomprimir(b){
+    var b64 = b.replace(/-/g,'+').replace(/_/g,'/'); while (b64.length % 4) b64 += '=';
+    var bin = atob(b64), arr = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    var flujo = new Blob([arr]).stream().pipeThrough(new DecompressionStream('deflate-raw'));
+    return new Response(flujo).text().then(JSON.parse);
+  }
+
+  // Lo que viene de la dirección se trata como datos: se comprueba la forma y se pinta con textContent.
+  function valido(d){
+    if (!d || d.v !== 2 || !/^\d{4}-\d{2}-\d{2}$/.test(d.f) || !Array.isArray(d.d) || !d.d.length || d.d.length > 8) return false;
+    return d.d.every(function(t){
+      return t && typeof t.id === 'string' && /^d\d$/.test(t.id) && ['titulo','que','hoy','siNo','sesgo','area','fuente'].every(function(k){ return typeof t[k] === 'string'; })
+        && Array.isArray(t.opciones) && t.opciones.length >= 2 && t.opciones.length <= 4
+        && t.opciones.every(function(o){ return o && /^[a-d]$/.test(o.id) && typeof o.t === 'string'; });
+    });
+  }
+
+  function pintar(){
+    datos.d.forEach(function(d){
+      var t = el('article','tarjeta'); t.id = 'tarjeta-'+d.id;
+      t.appendChild(el('span','etq', d.area));
+      t.appendChild(el('h2', null, d.titulo));
+      [['Qué es', d.que], ['Qué dice hoy', d.hoy], ['Si no decides', d.siNo]].forEach(function(p){
+        var b = el('div','dato'); b.appendChild(el('b',null,p[0])); b.appendChild(el('span',null,p[1])); t.appendChild(b);
+      });
+      var fs = el('fieldset'); fs.appendChild(el('legend', null, 'Opciones'));
+      var aplazada = Number(d.aplazada) || 0;
+      var extra = [{id:'ninguna', t:'Ninguna me vale', c:'Escribe en la nota por qué: la tarjeta se rehace y vuelve otro día.'},
+                   {id:'manana', t:'Lo dejo para mañana', c:'Aplazada ' + aplazada + (aplazada === 1 ? ' vez.' : ' veces.')}];
+      if (aplazada >= 2) { extra.push({id:'fuera', t:'Sácala de la bandeja diaria', c:'Pasa a la revisión de los lunes.'}); }
+      d.opciones.concat(extra).forEach(function(o){
+        var l = el('label','op'); var i = document.createElement('input');
+        i.type='radio'; i.name='op-'+d.id; i.value=o.id;
+        i.addEventListener('change', function(){ elegir(d.id, o.id, t); });
+        var s = el('span'); var tt = el('span','t',o.t); s.appendChild(tt);
+        if (o.rec === true) { tt.appendChild(el('span','rec','Recomendado')); }
+        if (o.c) { s.appendChild(el('span','c',o.c)); }
+        l.appendChild(i); l.appendChild(s); fs.appendChild(l);
+      });
+      t.appendChild(fs);
+      t.appendChild(el('p','sesgo','Mi sesgo: ' + d.sesgo));
+      t.appendChild(el('p','fuente','De: ' + d.fuente));
+      var nota = document.createElement('textarea'); nota.placeholder='Nota (opcional)'; nota.maxLength=280;
+      nota.setAttribute('aria-label','Nota sobre: '+d.titulo);
+      nota.addEventListener('input', function(){ if(respuestas[d.id]){ respuestas[d.id].n = nota.value.trim(); actualizar(); } });
+      t.appendChild(nota);
+      lista.appendChild(t);
+    });
+  }
+
+  function elegir(id, op, tarjeta){
+    respuestas[id] = {o: op, n: tarjeta.querySelector('textarea').value.trim()};
+    tarjeta.classList.add('hecha');
+    if (enTelegram && tg.HapticFeedback) { try { tg.HapticFeedback.selectionChanged(); } catch(e) {} }
+    actualizar();
+  }
+
+  function carga(){
+    var r = datos.d.filter(function(d){ return respuestas[d.id]; }).map(function(d){
+      var x = {id: d.id, o: respuestas[d.id].o}; if (respuestas[d.id].n) { x.n = respuestas[d.id].n; } return x;
+    });
+    return JSON.stringify({v:1, f:datos.f, r:r});
+  }
+
+  function actualizar(){
+    var total = datos.d.length, hechas = Object.keys(respuestas).length;
+    document.getElementById('resumen').textContent = datos.f.split('-').reverse().join('/') + ' · ' + hechas + ' de ' + total + ' respondidas';
+    document.getElementById('barra').style.width = (100*hechas/total) + '%';
+    var texto = hechas ? 'Enviar ' + hechas + (hechas===1?' respuesta':' respuestas') : 'Elige al menos una respuesta';
+    var demasiado = bytes(carga()) > TOPE_BYTES;
+    if (demasiado) { texto = 'Demasiado texto en las notas'; }
+    botonPagina.textContent = texto; botonPagina.disabled = !hechas || demasiado;
+    if (enTelegram) {
+      if (hechas && !demasiado) { tg.MainButton.setText(texto); tg.MainButton.show(); } else { tg.MainButton.hide(); }
+      if (demasiado) { mostrarAviso('Las notas ocupan más de lo que Telegram deja enviar. Acórtalas para poder enviar.'); }
+    }
+  }
+
+  function enviar(){
+    var c = carga();
+    if (bytes(c) > TOPE_BYTES || !Object.keys(respuestas).length) { return; }
+    if (enTelegram && !esEjemplo) { tg.sendData(c); return; }   // Telegram lo entrega al bot y cierra la página
+    var caja = document.getElementById('carga-simulada');
+    if (!caja) { caja = el('section','carga'); caja.id='carga-simulada'; lista.appendChild(caja); }
+    caja.textContent = '';
+    caja.appendChild(el('h3', null, 'Modo simulación · esto es lo que recibiría el bot (' + bytes(c) + ' de ' + TOPE_BYTES + ' bytes)'));
+    caja.appendChild(document.createTextNode(JSON.stringify(JSON.parse(c), null, 2)));
+    caja.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  function arrancar(d, ejemplo){
+    datos = d; esEjemplo = ejemplo;
+    pintar(); actualizar();
+    botonPagina.addEventListener('click', enviar);
+    if (enTelegram) {
+      tg.ready(); tg.expand();
+      try { tg.setHeaderColor('#1F4E79'); } catch(e) {}
+      tg.MainButton.onClick(enviar);
+      if (!ejemplo) { document.querySelector('.pie').hidden = true; }
+    }
+    if (ejemplo) {
+      mostrarAviso('Ejemplo con decisiones inventadas: esta página se ha abierto sin tarjetas. Las de verdad llegan desde el botón del bot. Nada de lo que contestes aquí se envía.');
+    } else if (!enTelegram) {
+      mostrarAviso('Modo simulación: estás fuera de Telegram. Al pulsar el botón verás lo que recibiría el bot; no se envía nada.');
+    }
+  }
+
+  var b = parametro('b');
+  if (b === null) { arrancar(JSON.parse(document.getElementById('ejemplo').textContent), true); return; }
+  if (typeof DecompressionStream !== 'function') {
+    mostrarAviso('Este Telegram no puede abrir la bandeja (le falta una función del navegador). Avísale a Claude: no se ha registrado nada.');
+    document.getElementById('resumen').textContent = 'No se puede abrir';
+    return;
+  }
+  descomprimir(b).then(function(d){
+    if (!valido(d)) { throw new Error('forma'); }
+    arrancar(d, false);
+  }).catch(function(){
+    mostrarAviso('La bandeja ha llegado dañada y no la puedo pintar. No se ha registrado nada; escribe cualquier cosa al bot y te la vuelve a mandar.');
+    document.getElementById('resumen').textContent = 'No se puede abrir';
+  });
+})();
+</script>
+</body>
+</html>
