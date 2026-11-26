@@ -149,7 +149,7 @@ button.enviar:focus-visible{outline:3px solid var(--cyan);outline-offset:2px}
       var fs = el('fieldset'); fs.appendChild(el('legend', null, 'Opciones'));
       var aplazada = Number(d.aplazada) || 0;
       var extra = [{id:'ninguna', t:'Ninguna me vale', c:'Escribe en la nota por qué: la tarjeta se rehace y vuelve otro día.'},
-                   {id:'manana', t:'Lo dejo para mañana', c:'Aplazada ' + aplazada + (aplazada === 1 ? ' vez.' : ' veces.')}];
+                   {id:'manana', t:'Lo dejo para mañana', c:(aplazada ? 'Ya ha venido ' + aplazada + (aplazada === 1 ? ' vez sin decidirse.' : ' veces sin decidirse.') : 'Vuelve en la bandeja de mañana.')}];
       if (aplazada >= 2) { extra.push({id:'fuera', t:'Sácala de la bandeja diaria', c:'Pasa a la revisión de los lunes.'}); }
       d.opciones.concat(extra).forEach(function(o){
         var l = el('label','op'); var i = document.createElement('input');
